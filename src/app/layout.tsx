@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import Link from 'next/link';
 import { Provider } from '@/app/_components/provider';
 import './globals.css';
 
@@ -17,7 +18,24 @@ export default function RootLayout({
   return (
     <html lang='ja'>
       <body className={inter.className}>
-        <Provider>{children}</Provider>
+        <Provider>
+          <h1>RootLayout</h1>
+          <nav className='flex space-x-8 justify-center'>
+            <Link href='/'>
+              <div>TOP</div>
+            </Link>
+            <Link href='/with-footer'>
+              <div>Footerありページ</div>
+            </Link>
+            <Link href='/without-footer'>
+              <div>Footerなしページ</div>
+            </Link>
+            <Link href='/form'>
+              <div>フォーム</div>
+            </Link>
+          </nav>
+          {children}
+        </Provider>
       </body>
     </html>
   );
