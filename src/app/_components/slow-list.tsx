@@ -1,17 +1,21 @@
+'use client';
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+export function SlowList({ text }: { text: string }) {
+  const router = useRouter();
 
-export async function SlowList({ text }: { text: string }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (text !== '') {
         // API呼び出し処理
-        alert(`call API:${text}`);
+        router.replace(`/form?params=${text}`);
+        alert(`api called: ${text}`);
       }
     }, 1000);
 
     // cleanup
     return () => clearTimeout(timer);
-  }, [text]);
+  }, [router, text]);
 
   return <p>{`input:${text}`}</p>;
 }

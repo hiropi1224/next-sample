@@ -1,5 +1,6 @@
 'use client';
 import React, { FC, useEffect, useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 import { Input } from '@/app/_components/input';
 import { sleep } from '@/app/_utils/sleep';
 
@@ -8,18 +9,22 @@ const sleepTime = 1000;
 export const TextInput: FC = () => {
   const [text, setText] = useState('');
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (text !== '') {
         // API呼び出し処理
-        alert(`call API:${text}`);
+        router.replace(`/form?params=${text}`);
+        alert(`api called: ${text}`);
+      } else {
+        router.replace(`/form`);
       }
     }, sleepTime);
 
     // cleanup
     return () => clearTimeout(timer);
-  }, [text]);
+  }, [router, text]);
 
   return (
     <div>
