@@ -2,6 +2,8 @@
 import React, { FC, useEffect, useState, useTransition } from 'react';
 import { sleep } from '@/app/_utils/sleep';
 
+const sleepTime = 1000;
+
 export const TextInput: FC = () => {
   const [text, setText] = useState('');
   const [isPending, startTransition] = useTransition();
@@ -12,7 +14,7 @@ export const TextInput: FC = () => {
         // API呼び出し処理
         alert(`call API:${text}`);
       }
-    }, 1000);
+    }, sleepTime);
 
     // cleanup
     return () => clearTimeout(timer);
@@ -27,7 +29,7 @@ export const TextInput: FC = () => {
           onChange={(e) => {
             setText(e.target.value);
             startTransition(async () => {
-              await sleep(1000);
+              await sleep(sleepTime);
             });
           }}
         />
