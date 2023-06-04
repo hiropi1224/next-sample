@@ -1,5 +1,6 @@
 'use client';
 import React, { FC, useEffect, useState, useTransition } from 'react';
+import { Input } from '@/app/_components/input';
 import { sleep } from '@/app/_utils/sleep';
 
 const sleepTime = 1000;
@@ -23,8 +24,7 @@ export const TextInput: FC = () => {
   return (
     <div>
       <div className='flex w-1/3'>
-        <input
-          className='w-full flex-1 inline-flex items-center justify-center rounded py-2 text-base shadow-sm focus:shadow'
+        <Input
           value={text}
           onChange={(e) => {
             setText(e.target.value);
@@ -33,7 +33,11 @@ export const TextInput: FC = () => {
             });
           }}
         />
-        <div>{isPending ? <>...loading</> : <></>}</div>
+        <div className='mx-2 flex justify-center items-center'>
+          {isPending ? (
+            <div className='h-8 w-8 rounded-full border-4 border-t-indigo-500/100 relative animate-spin' />
+          ) : null}
+        </div>
       </div>
       <div>
         <p>{text}</p>

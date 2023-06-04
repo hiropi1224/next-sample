@@ -1,5 +1,6 @@
 'use client';
 import { useState, useDeferredValue, FC, Suspense } from 'react';
+import { Input } from '@/app/_components/input';
 import { SlowList } from '@/app/_components/slow-list';
 
 export const InputWithDeferred: FC = () => {
@@ -10,13 +11,13 @@ export const InputWithDeferred: FC = () => {
     <>
       <label>
         input-with-deferred
-        <input
-          className='w-full flex-1 inline-flex items-center justify-center rounded py-2 text-base shadow-sm focus:shadow'
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
+        <Input value={text} onChange={(e) => setText(e.target.value)} />
       </label>
-      <Suspense fallback={<>...loading</>}>
+      <Suspense
+        fallback={
+          <div className='h-8 w-8 rounded-full border-4 border-t-indigo-500/100 relative animate-spin' />
+        }
+      >
         <SlowList text={deferredText} />
       </Suspense>
     </>
