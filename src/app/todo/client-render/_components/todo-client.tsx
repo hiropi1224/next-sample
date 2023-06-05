@@ -1,10 +1,9 @@
 'use client';
-import { ChangeEvent, useState } from 'react';
-import { useQueryTodo } from '@/app/_hooks/useQueryTodo';
+import { ChangeEvent, Suspense, useState } from 'react';
+import { TodoItem } from '@/app/todo/client-render/_components/todo-item';
 
 export const ClientTodo: React.FC = () => {
   const [id, setId] = useState('1');
-  const { data: todo, refetch } = useQueryTodo(id);
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) =>
     setId(e.target.value);
@@ -23,15 +22,19 @@ export const ClientTodo: React.FC = () => {
       </select>
 
       <h2>{`${id}: TODO`}</h2>
-      <button onClick={() => refetch()}>refetch</button>
-
-      {todo && (
-        <div className='border'>
-          <p>{`id:${todo.id}`}</p>
-          <p>{`userId:${todo.userId}`}</p>
-          <p>{`title:${todo.title}`}</p>
-        </div>
-      )}
+      <Suspense fallback={<Loading />}>
+        <TodoItem id={id} />
+      </Suspense>
     </div>
   );
 };
+
+function Loading() {
+  return (
+    <div className='min-h-screen flex justify-center items-center'>
+      <div className='h-2 w-2 animate-ping rounded-full bg-pink-600'></div>
+      <div className='mx-4 h-2 w-2 animate-ping rounded-full bg-pink-600'></div>
+      <div className='h-2 w-2 animate-ping rounded-full bg-pink-600'></div>
+    </div>
+  );
+}

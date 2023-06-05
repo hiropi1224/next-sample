@@ -1,12 +1,14 @@
+'use client';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { zTodo } from '@/app/_type/todo';
 import { sleep } from '@/app/_utils/sleep';
 
 const getTodo = async (id: string) => {
-  const { data } = await axios
-    .get(`https://jsonplaceholder.typicode.com/todos/${id}`)
-    .then(await sleep(3000));
+  await sleep(3000);
+  const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+    cache: 'no-store',
+  });
+  const data = await res.json();
   const todo = zTodo.parse(data);
 
   return todo;
@@ -14,7 +16,9 @@ const getTodo = async (id: string) => {
 
 export const useQueryTodo = (id: string) => {
   return useQuery({
-    queryKey: ['todo'],
+    queryKey: ['todo', id],
     queryFn: () => getTodo(id),
+    cacheTime: 0,
+    staleTime: 0,
   });
 };
