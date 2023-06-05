@@ -33,6 +33,12 @@ export default function RootLayout({
             <Link href='/form'>
               <div>フォーム</div>
             </Link>
+            <Link href='/todo/server-render'>
+              <div>server-render</div>
+            </Link>
+            <Link href='/todo/client-render'>
+              <div>client-render</div>
+            </Link>
           </nav>
           {children}
         </Provider>
