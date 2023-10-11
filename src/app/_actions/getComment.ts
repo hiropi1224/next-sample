@@ -6,7 +6,7 @@ export const comment = {
     const res = await fetch(
       `https://jsonplaceholder.typicode.com/comments?postId=${id}`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: 60 },
       }
     );
     const data = await res.json();

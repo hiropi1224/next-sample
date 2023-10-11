@@ -4,7 +4,7 @@ export const todo = {
   getTodos: async () => {
     await new Promise((resolve) => setTimeout(resolve, 3000));
     const res = await fetch(`https://jsonplaceholder.typicode.com/todos`, {
-      next: { revalidate: 0 },
+      next: { revalidate: 60 },
     });
     const data = await res.json();
     const todos = zTodos.parse(data);
@@ -17,7 +17,7 @@ export const todo = {
     const res = await fetch(
       `https://jsonplaceholder.typicode.com/todos/${id}`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: 60 },
       }
     );
     const data = await res.json();
