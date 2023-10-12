@@ -1,0 +1,6 @@
+{
+  "hello": {
+    "title": "Hello World!",
+    "text": "i18n support using Next.js"
+  }
+}
