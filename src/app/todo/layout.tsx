@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import { todo } from '@/app/_actions/getTodo';
 import { Await } from '@/app/_components/await';
-import Loading from '@/app/todo/loading';
 
 export const metadata = {
   title: 'Todo',
@@ -36,5 +35,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </Suspense>
       {children}
     </main>
+  );
+}
+
+function Loading() {
+  return (
+    <div className='min-h-screen flex justify-center items-center'>
+      <div className='h-2 w-2 animate-ping rounded-full bg-pink-600'></div>
+      <div className='mx-4 h-2 w-2 animate-ping rounded-full bg-pink-600'></div>
+      <div className='h-2 w-2 animate-ping rounded-full bg-pink-600'></div>
+    </div>
   );
 }
